@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <script>
+        let height = prompt("Angiv højde");
+        let weight = prompt("Angiv vægt");
+        let bmi = weight / (height * height);
+        let resultat;
+
+        if (bmi < 19) {
+            resultat = "fedmeklasse: undervægtig";
+        } else if (bmi > 20 && bmi < 25) {
+            resultat = "fedmeklasse: normal";
+        } else if (bmi > 25 && bmi < 30) {
+            resultat = "fedmeklasse: overvægtig";
+        } else if (bmi > 30 && bmi < 35) {
+            resultat = "fedmeklasse: fed";
+        } else if (bmi > 35 && bmi < 40) {
+            resultat = "fedmeklasse: svær fedme";
+        } else if (bmi > 40) {
+            resultat = "fedmeklasse: ekstremt fed";
+        }
+
+        console.log(bmi);
+        console.log(resultat);
+
+    </script>
+</body>
+
+</html>
