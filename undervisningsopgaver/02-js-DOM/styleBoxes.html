@@ -20,6 +20,14 @@
             background-color: red;
         }
 
+        .boxa {
+            background-color: blue;
+        }
+
+        .boxb {
+            background-color: green;
+        }
+
         /*********************/
 
     </style>
@@ -27,12 +35,47 @@
 </head>
 
 <body>
-    <div class="box" class="boxa" id="box1"></div>
-    <div class="box" class="boxb" id="box2"></div>
+    <div class="box boxa" id="box1"></div>
+    <div class="box boxb" id="box2"></div>
     <div class="box" id="box3"></div>
     <div class="box" id="box4"></div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let klik = document.querySelector("#box1");
+            let klik2 = document.querySelector("#box2");
+            let klik3 = document.querySelector("#box3");
+            let klik4 = document.querySelector("#box4");
+            document.querySelector("#box1").classList.remove("boxa");
+            document.querySelector("#box2").classList.remove("boxb");
+            klik.addEventListener("click", box1);
+            klik2.addEventListener("click", box2);
+            klik3.addEventListener("click", box3);
+            klik4.addEventListener("click", box4);
+        }
+
+        function box1() {
+            document.querySelector("#box1").classList.add("boxa");
+        }
+
+        function box2() {
+            document.querySelector("#box2").classList.add("boxb");
+        }
+
+        function box3() {
+            let klik3 = document.querySelector("#box3");
+            klik3.style.transition = "1.5s";
+            klik3.style.backgroundColor = "orange";
+        }
+
+        function box4() {
+            let klik4 = document.querySelector("#box4");
+            klik4.style.transition = "1.5s";
+            klik4.style.backgroundColor = "black";
+        }
+
     </script>
 </body>
 
