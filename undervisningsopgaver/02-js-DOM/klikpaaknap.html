@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A</title>
+    <style>
+        #box,
+        #bax {
+            width: 200px;
+            height: 200px;
+            background-color: wheat;
+            padding: 20px;
+            margin: 10px;
+        }
+
+        button {
+            font-size: 2rem;
+            margin: 10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <button id="klik">
+        klik
+    </button>
+    <button id="slet">
+        slet
+    </button>
+    <button id="html">
+        html
+    </button>
+    <button id="flyt">
+        flyt
+    </button>
+    <div id="box"></div>
+    <div id="bax"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let klik = document.querySelector("#klik");
+            let click = document.querySelector("#html");
+            klik.addEventListener("click", tekst);
+            click.addEventListener("click", tekst2);
+        }
+
+        function tekst() {
+            document.querySelector("#box").textContent = "KLIK";
+
+            let klik = document.querySelector("#slet");
+            klik.addEventListener("click", fjern);
+        }
+
+        function tekst2() {
+            document.querySelector("#box").innerHTML = `<h2> HTML</h2>`;
+            document.querySelector("#box").innerHTML += `<p> Paragraf</p>`;
+            let flyt = document.querySelector("#flyt");
+            flyt.addEventListener("click", skift);
+        }
+
+        function skift() {
+            document.querySelector("#box").innerHTML = `<h2></h2>`;
+            document.querySelector("#box").innerHTML += `<p></p>`;
+            document.querySelector("#bax").innerHTML = `<h2>HTML</h2>`;
+            document.querySelector("#bax").innerHTML += `<p>Paragraf</p>`;
+        }
+
+        function fjern() {
+            document.querySelector("#box").textContent = "";
+        }
+
+    </script>
+</body>
+
+</html>
