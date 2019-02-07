@@ -11,10 +11,7 @@
 <body>
 
     <div id="dyr">
-        <h2></h2>
-        <img src="" alt="">
-        <p>Type:</p>
-        <p>Levested:</p>
+
     </div>
 
 
@@ -34,16 +31,16 @@
         let destination = document.querySelector("#dyr");
 
         let navn = `${dyr.Navn}`;
-        destination.querySelector("h2").textContent = navn;
+        destination.innerHTML = navn;
 
         let type = `${dyr.Type}`;
-        destination.querySelector("p").textContent += type;
+        destination.innerHTML += type;
 
         let billede = `${dyr.Billede}`;
-        destination.querySelector("img").src = billede;
+        destination.innerHTML += billede;
 
         let levested = `${dyr.Levested}`;
-        destination.querySelector("p+p").textContent += levested;
+        destination.innerHTML += levested;
 
 
         console.log(dyr);
