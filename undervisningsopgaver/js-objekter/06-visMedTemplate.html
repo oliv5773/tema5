@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .minedyr {
+            border: 1px solid
+        }
+
+        ;
+
+    </style>
+</head>
+
+<body>
+
+    <div id="dyr">
+    </div>
+
+
+    <script>
+        let alleDyr = [{
+                "Navn": "Gurli",
+                "Type": "Gris",
+                "Billede": "http://helf-kea.dk/test/gris.png",
+                "Levested": "Overalt",
+            },
+
+            {
+                "Navn": "Freddy",
+                "Type": "Frø",
+                "Billede": "http://helf-kea.dk/test/frog.png",
+                "Levested": "Sø",
+            },
+
+            {
+                "Navn": "Ronny",
+                "Type": "Ræv",
+                "Billede": "http://helf-kea.dk/test/fox.png",
+                "Levested": "Skov",
+            },
+
+            {
+                "Navn": "Sille",
+                "Type": "Sild",
+                "Billede": "http://helf-kea.dk/test/sild.jpg",
+                "Levested": "Vand",
+            },
+
+            {
+                "Navn": "Karsten",
+                "Type": "Krokodille",
+                "Billede": "http://helf-kea.dk/test/kroko.jpg",
+                "Levested": "Vand",
+            }
+        ];
+
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let destination = document.querySelector("#dyr");
+            alleDyr.forEach(dyr => {
+                destination.innerHTML += `<div class="minedyr"> <h3>${dyr.Navn}</h3> <br><img src = "${dyr.Billede}"> <p><br>er en/et ${dyr.Type} <br>som lever i ${dyr.Levested}</p>`;
+
+            })
+        }
+
+
+
+
+        console.log(alleDyr);
+
+    </script>
+</body>
+
+</html>
