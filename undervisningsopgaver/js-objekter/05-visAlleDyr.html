@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <div id="dyr">
+    </div>
+
+
+    <script>
+        let alleDyr = [{
+                "Navn": "Gurli",
+                "Type": "Gris",
+                "Billede": "http://helf-kea.dk/test/gris.png",
+                "Levested": "Overalt",
+            },
+
+            {
+                "Navn": "Freddy",
+                "Type": "Frø",
+                "Billede": "http://helf-kea.dk/test/frog.png",
+                "Levested": "Sø",
+            },
+
+            {
+                "Navn": "Ronny",
+                "Type": "Ræv",
+                "Billede": "http://helf-kea.dk/test/fox.png",
+                "Levested": "Skov",
+            },
+
+            {
+                "Navn": "Sille",
+                "Type": "Sild",
+                "Billede": "http://helf-kea.dk/test/sild.jpg",
+                "Levested": "Vand",
+            },
+
+            {
+                "Navn": "Karsten",
+                "Type": "Krokodille",
+                "Billede": "http://helf-kea.dk/test/kroko.jpg",
+                "Levested": "Vand",
+            }
+        ];
+
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let destination = document.querySelector("#dyr");
+            alleDyr.forEach(dyr => {
+                destination.innerHTML += `<div class="minedyr"> ${dyr.Navn} er et ${dyr.Type} som lever i ${dyr.Levested}`;
+            })
+        }
+
+
+
+
+        console.log(alleDyr);
+
+    </script>
+</body>
+
+</html>
