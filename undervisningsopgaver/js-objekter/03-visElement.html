@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <div id="dyr">
+        <h2></h2>
+        <img src="" alt="">
+        <p>Type:</p>
+        <p>Levested:</p>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", Object);
+        console.log("DOM fully loaded and parsed");
+
+
+
+        let dyr = {
+            "Navn": "Martin",
+            "Type": "Kat",
+            "Billede": "https://www.idenyt.dk/globalassets/denmark/kaledyr-2/fordele-ved-at-have-kat/11-grunde-til-katte-er-skoenne.jpg?preset=width700",
+            "Levested": "Overalt"
+        }
+
+        let destination = document.querySelector("#dyr");
+
+        let navn = `${dyr.Navn}`;
+        destination.querySelector("h2").textContent = navn;
+
+        let type = `${dyr.Type}`;
+        destination.querySelector("p").textContent += type;
+
+        let billede = `${dyr.Billede}`;
+        destination.querySelector("img").src = billede;
+
+        let levested = `${dyr.Levested}`;
+        destination.querySelector("p+p").textContent += levested;
+
+
+        console.log(dyr);
+
+        console.log("Dyr: kat, type: pattedyr, levested: overalt");
+
+    </script>
+</body>
+
+</html>
