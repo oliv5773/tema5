@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personliste</title>
+    <style>
+        .liste {
+            border: 1px solid;
+        }
+
+        .liste {
+            display: grid;
+            grid-template-columns: repeat (1, 300px);
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        @media only screen and (min-width: 768px) {
+            .liste {
+                grid-template-columns: 2fr 2fr;
+            }
+        }
+
+        @media only screen and (min-width: 1024px) {
+            .liste {
+                grid-template-columns: 3fr 3fr 3fr;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="liste">
+    </div>
+
+
+    <script>
+        let alleDyr = [];
+
+        //Hent JSON-fil i asynkron function
+        async function hentJson() {
+
+            //henter datafilen
+            let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1OLlD_GRoz71piHvnW306omRAyHS7vtLOILQt-K0YF_c");
+            console.log(jsonData);
+            // den hentede data skal tolkes som JSON
+            alleDyr = await jsonData.json();
+            console.log(alleDyr);
+            //kald funktion der viser data i DOM
+            start();
+
+        }
+
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+        function start() {
+            let dest = document.querySelector(".liste");
+            //Løb personlisten igennem og indsæt data i en template
+
+            alleDyr.forEach(dyr => {
+                //Placer dyr i html
+                dest.innerHTML +=
+                    `<div class="liste">
+                 <h2>${dyr.navn}</h2>
+                 <img src="${dyr.billede}" alt ="${dyr.navn}>
+<p>GitHub: "${dyr.github}"</p>
+<a href="https://github.com/${dyr.github}">${dyr.github}</a>`;
+            })
+
+        }
+
+    </script>
+</body>
+
+</html>
