@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bistro Babushka</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: beige;
+        }
+
+        .menu {
+            text-align: center;
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+
+        .valgt {
+            background-color: orangered;
+            transition: ease-in 0.6s;
+        }
+
+        .liste {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        img {
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            padding-top: 75px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        a {
+            text-align: center;
+        }
+
+        .splash {
+            height: 200px;
+            width: 100%;
+            background-color: coral;
+        }
+
+        #popup {
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background-color: coral;
+            display: none;
+            overflow: scroll;
+        }
+
+        #indhold {
+            min-height: 50vh;
+            background-color: white;
+            width: 70vw;
+            margin: 4rem auto;
+        }
+
+        #luk {
+            position: fixed;
+            right: 2rem;
+            padding-right: 2rem;
+        }
+
+        #luk button {
+            font-size: 2rem;
+            padding: 1rem 2rem;
+        }
+
+
+
+        @media only screen and (min-width: 600px) {
+            .liste {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media only screen and (min-width: 1000px) {
+            .liste {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .retter {
+            border-width: 5px;
+            border: 3px solid orange;
+            padding: 10px;
+            transition: ease-in 2s;
+            margin: 0.2em;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="popup">
+        <div id="luk">
+            <button>X</button>
+        </div>
+        <div id="indhold"></div>
+    </div>
+
+    <header>
+        <div class="splash">
+            <h1>Bistro Babushka</h1>
+        </div>
+    </header>
+
+
+    <h3>Menu</h3>
+
+    <div class="menu">
+        <button class="filter valgt" data-hold="alle">Menu</button>
+        <button class="filter" data-hold="forretter">Forretter</button>
+        <button class="filter" data-hold="hovedretter">Hovedretter</button>
+        <button class="filter" data-hold="desserter">Desserter</button>
+        <button class="filter" data-hold="drikkevarer">Drikkevarer</button>
+        <button class="filter" data-hold="sideorders">Side-orders</button>
+
+    </div>
+
+    <div class="liste"></div>
+
+
+    <script>
+        let urlParams = new URLSearchParams(window.location.search);
+        let alleRetter = [];
+        let filter = "alle";
+        const dest = document.querySelector(".liste");
+
+        //Hent JSON-fil i asynkron function
+        async function hentJson() {
+            //Løb personlisten igennem og indsæt data i en template
+            //henter datafilen
+            let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
+            console.log(jsonData);
+            // den hentede data skal tolkes som JSON
+            alleRetter = await jsonData.json();
+            console.log(alleRetter);
+
+
+            //kald funktion der viser data i DOM
+            start();
+
+        }
+
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+        function start() {
+            dest.innerHTML = "";
+            alleRetter.forEach(ret => {
+
+                if (filter == "alle" || filter == ret.kategori) {
+                    let template =
+                        //Placer ret i html
+                        `<div class="retter">
+                 <img src="imgs/small/${ret.billede}-sm.jpg" alt ="${ret.navn}">
+<h2>${ret.navn}</h2>
+<p>${ret.kort}</p>
+<p>${ret.pris} kr.</p>`;
+
+                    dest.insertAdjacentHTML("beforeend", template);
+                    dest.lastElementChild.addEventListener("click", () => {
+                        location.href = "single.html?id=" + ret.id;
+                    });
+
+                    function visSingle(ret) {
+                        document.querySelector("#indhold").innerHTML =
+                            `<div class = "retter">
+                            <h2>${ret.navn}</h2>
+<img class = "billede" src ="imgs/large/${ret.billede}.jpg" alt = "${ret.navn}">
+<p>${ret.kort}</p>
+<p>${ret.pris} kr. </p>
+<p>${ret.lang}</p>
+                            </div>`;
+                        document.querySelector("#popup").style.display = "block";
+                        document.querySelector("#popup #luk").addEventListener("click", close);
+                    }
+
+                    function close() {
+                        document.querySelector("#popup").style.display = "none";
+                    }
+                }
+            });
+
+        }
+
+
+        document.querySelectorAll(".filter").forEach(elm => {
+            elm.addEventListener("click", filtrering);
+
+        })
+
+        function filtrering() {
+            filter = this.getAttribute("data-hold");
+            document.querySelector("h3").textContent = this.textContent;
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.classList.remove("valgt");
+            });
+            this.classList.add("valgt");
+            start();
+        }
+        start();
+
+    </script>
+</body>
+
+</html>

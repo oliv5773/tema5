@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        #single {
+            width: 100vw;
+            height: 100vh;
+            background-color: coral;
+        }
+
+        #indhold {
+            min-height: 50vh;
+            background-color: white;
+            width: 70vw;
+            margin: 2rem auto;
+        }
+
+        #tilbage {
+            right: 2rem;
+            padding-right: 2rem;
+        }
+
+
+        #tilbage button {
+            font-size: 2rem;
+            padding: 1rem 2rem;
+        }
+
+        .retter {
+            text-align: center;
+        }
+
+        .retter img {
+            display: block;
+            width: 50%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            padding-top: 75px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        a {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <main id="single">
+        <div id="tilbage">
+            <button>«</button>
+        </div>
+        <div id="indhold"></div>
+    </main>
+
+    <script>
+        let urlParams = new URLSearchParams(window.location.search)
+        let id = urlParams.get("id");
+        let alleRetter = [];
+
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+
+
+
+        async function hentJson() {
+            //Løb personlisten igennem og indsæt data i en template
+            //henter datafilen
+            let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo&fbclid=IwAR3JFFIw6pVklfQHR4YNyPwYFl7-1hsa_jZJbtzCokcYOB_400m2UbsLC1Y");
+            console.log(jsonData);
+            // den hentede data skal tolkes som JSON
+            alleRetter = await jsonData.json();
+            console.log(alleRetter);
+
+
+            //kald funktion der viser data i DOM
+            start();
+
+        }
+
+        function start() {
+            let dest = document.querySelector("#indhold");
+
+            dest.innerHTML = "";
+            alleRetter.forEach(ret => {
+                if (ret.id == id) {
+                    let template =
+                        //Placer ret i html
+                        `<div class="retter">
+<h2>${ret.navn}</h2>
+                 <img src="imgs/large/${ret.billede}.jpg" alt ="${ret.navn}">
+<p>${ret.pris} kr.</p>
+<p>${ret.lang}</p>
+`;
+
+                    dest.insertAdjacentHTML("beforeend", template);
+                }
+            });
+
+        }
+
+        document.querySelector("#tilbage button").addEventListener("click", () => {
+            location.href = "babushka-single.html"
+        })
+
+    </script>
+</body>
+
+</html>
