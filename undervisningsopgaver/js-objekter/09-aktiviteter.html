@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .minedyr {
+            border: 1px solid
+        }
+
+        ;
+
+        #dyr {
+            display: grid;
+            grid-template-columns: auto;
+        }
+
+        @media only screen and (min-width: 768px) {
+            #dyr {
+                grid-template-columns: 2fr 2fr;
+            }
+        }
+
+        @media only screen and (min-width: 1024px) {
+            #dyr {
+                grid-template-columns: 3fr 3fr 3fr;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="dyr">
+    </div>
+
+
+    <script>
+        let alleDyr = [{
+                "header": "Danmarks Naturfredningsforening søger affaldshelte for en dag!",
+                "tekst": "Søndag d. 31. marts er der Affaldsindsamling i hele Danmark. Den årlige indsamling lever af lokale ildsjæle, der for en dag skifter sofaen ud med affaldssækken. Skal du være affaldshelt?",
+                "billede": "https://dit-roskilde.dk/wp-content/uploads/2018/06/IMG_2516-200x150.jpg",
+                "dato": "5. februar 2019 —",
+            },
+
+            {
+                "header": "Nu er rehabiliteringsophold gratis",
+                "tekst": "Nogle borgere har brug for intensiv pleje og genoptræning, når de bliver udskrevet fra et hospitalsophold. Det har hidtil kostet dem 137,50 kr. i døgnet. Fra 1. februar 2019 er det blevet gratis.",
+                "billede": "https://dit-roskilde.dk/wp-content/uploads/2019/01/fitness-sport-tr%C3%A6ning-v%C3%A6gte-motion-abw-7-200x150.jpg",
+                "dato": "1. februar 2019 —",
+            },
+
+            {
+                "header": "Skolevalg 2019: Flertal til rød blok i Roskilde Kommune",
+                "tekst": "860 elever i 8. og 9. klasse på ni folkeskoler i Roskilde Kommune har ved Skolevalg 2019 givet er klart flertal til rød blok – modsat landsresultatet, hvor blå blok løber af med sejren. Det oplyses i en pressemeddelse.",
+                "billede": "https://dit-roskilde.dk/wp-content/uploads/2017/09/abw-valg-din-stemme-er-vigtig2-200x150.jpg",
+                "dato": "1. februar 2019 —",
+            },
+
+            {
+                "header": "Den gladeste opvasker søges",
+                "tekst": "Har du helt styr på, hvordan tallerkenerne skal stables? Og er du Roskildes gladeste opvasker ml. 15 og 18 år? Så er det dig, Slagter Frimann søger!",
+                "billede": "https://dit-roskilde.dk/wp-content/uploads/2018/04/abw-nyt-jobs%C3%B8gning-200x150.jpg",
+                "dato": "1. februar 2019 —",
+            },
+
+            {
+                "header": "Okse i rødvin på en kold vinteraften",
+                "tekst": "Nogen gange er det lækkert med det enkle køkken, med meget få ingredienser i maden. Duften af rødvin, det brunede oksekød og urterne som breder sig i ens hjem, er bare utroligt lækkert. Chef Aagaard har en lækker vinteropskrift klar til jer.",
+                "billede": "https://dit-roskilde.dk/wp-content/uploads/2019/02/MAA_2094-200x150.jpg",
+                "dato": "1. februar 2019 —",
+            }
+        ];
+
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let destination = document.querySelector("#dyr");
+            alleDyr.forEach(dyr => {
+                destination.innerHTML += `<div class="minedyr"> <h3>${dyr.header}</h3> <br><img src = "${dyr.billede}"> <p><br>er en/et ${dyr.tekst} <br>som lever i ${dyr.dato}</p>`;
+
+            })
+        }
+
+
+
+
+        console.log(alleDyr);
+
+    </script>
+</body>
+
+</html>
